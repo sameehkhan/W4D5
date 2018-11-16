@@ -9,15 +9,14 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
-
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
   context 'Test User validations' do 
+    User.create(username: 'sam', password: 'password')
     it { should validate_presence_of(:username) }
     it { should validate_uniqueness_of(:username) }
-    it { should validate_presence_of(:session_token) }
-    it { should validate_uniqueness_of(:session_token) }
+    # it { should validate_presence_of(:session_token) }
     it { should validate_presence_of(:password_digest) }
   end 
   
@@ -31,11 +30,10 @@ RSpec.describe User, type: :model do
   end
   
   context 'Find by credentials' do 
-    subject(:jerrick) { User.create!(username: 'Jerrick', password: 'password')}
-    
     it 'should be able to find by credentials' do 
-      user = User.find_by_credentials('Jerrick', 'password')
-      expect(user.username).to eq(jerrick.username)
+      jerrick1 = User.create(username: 'Jerrick1', password: 'password')
+      user = User.find_by_credentials('Jerrick1', 'password')
+      expect(user.username).to eq(jerrick1.username)
     end 
   end
 end
