@@ -16,6 +16,14 @@ RSpec.describe User, type: :model do
   context 'User has many' do 
     it { should have_many(:goals)}
     it { should have_many(:comments)}
-  end 
+  end
+  
+  context 'Find by credentials' do 
+    subject(:jerrick) { User.create!(username: 'Jerrick', password: 'password')}
+    
+    it 'should be able to find by credentials' do 
+      user = User.find_by_credentials('Jerrick', 'password')
+      expect(user.username).to eq(jerrick.username)
+  end
 end
   
