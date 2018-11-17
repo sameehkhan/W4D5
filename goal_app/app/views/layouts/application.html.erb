@@ -10,6 +10,11 @@
   </head>
 
   <body>
+    <%if logged_in?  %>
+    <form class="" action="index.html" method="post">
+      
+    </form>
+    <% end %>
     <%= yield %>
   </body>
 </html>
